@@ -4,6 +4,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         Fireball = sprites.createProjectileFromSprite(assets.image`Dark Blast`, NecroPlayer, controller.dx(1000), controller.dy(1000))
     }
 })
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
+	
+})
+info.onLifeZero(function () {
+    game.over(false, effects.dissolve)
+})
+let Soldier1hp: StatusBarSprite = null
 let Soldier: Sprite = null
 let Fireball: Sprite = null
 let NecroPlayer: Sprite = null
@@ -142,6 +149,9 @@ game.showLongText("Then, use their bodies as a literal bridge over to the next l
 game.showLongText("Have fun!", DialogLayout.Center)
 game.onUpdateInterval(5000, function () {
     Soldier = sprites.create(assets.image`Soldier1`, SpriteKind.Enemy)
-    Soldier.follow(NecroPlayer, 49)
+    Soldier.follow(NecroPlayer, 45)
     tiles.placeOnRandomTile(Soldier, assets.tile`Ground_tile1`)
+    Soldier1hp = statusbars.create(20, 4, StatusBarKind.Health)
+    Soldier1hp.attachToSprite(Soldier)
+    Soldier1hp.value = 3
 })
