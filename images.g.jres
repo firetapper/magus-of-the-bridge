@@ -1,0 +1,17 @@
+{
+    "image1": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAzAAAAAAAAMC7//8A7gAAwKv6/+/rAAC8qqr/7/wMAMy7qhv7y/vArLqr/+vM/Lyqqqu+68v8rKqqq77ry/zMrLqr/+vM/ADMu6ob+8v7AMyqqv/v/wwAwKv6/+/rAADAu/z/AO4AAADMAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "Necro-Player"
+    },
+    "image2": {
+        "data": "hwQQABAAAAAAAAAAAAAAALsLAMwMzAzMsLPLusyqzMMAq6uqOqo7DADAqjqzu8sAAMA7OqM6zAAArDOjqqrLDACsM6OqOsMMAMA7qro7wwwAwKozqjvMAAC8OjOqu8MAALw7M7uqywDAy6yruqrLDMzMzKy6zAzMAAAAzMwAAMAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "Dark Blast"
+    },
+    "*": {
+        "mimeType": "image/x-mkcd-f4",
+        "dataEncoding": "base64",
+        "namespace": "myImages"
+    }
+}
