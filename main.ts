@@ -4,6 +4,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         Fireball = sprites.createProjectileFromSprite(assets.image`Dark Blast`, NecroPlayer, controller.dx(1000), controller.dy(1000))
     }
 })
+let Soldier: Sprite = null
 let Fireball: Sprite = null
 let NecroPlayer: Sprite = null
 NecroPlayer = sprites.create(assets.image`Necro-Player`, SpriteKind.Player)
@@ -132,10 +133,15 @@ scene.setBackgroundImage(img`
     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     `)
-tiles.placeOnRandomTile(NecroPlayer, sprites.dungeon.collectibleInsignia)
+tiles.placeOnRandomTile(NecroPlayer, assets.tile`Ground_tile`)
 info.setLife(5)
 game.showLongText("Welcome To the game \"Magus of the Bridge\"!", DialogLayout.Center)
 game.showLongText("The goal of this game is simple.", DialogLayout.Center)
 game.showLongText("Shoot projectiles to kill enemies, raise them back to life to fight for you.", DialogLayout.Center)
 game.showLongText("Then, use their bodies as a literal bridge over to the next level!", DialogLayout.Center)
 game.showLongText("Have fun!", DialogLayout.Center)
+game.onUpdateInterval(5000, function () {
+    Soldier = sprites.create(assets.image`Soldier1`, SpriteKind.Enemy)
+    Soldier.follow(NecroPlayer, 49)
+    tiles.placeOnRandomTile(Soldier, assets.tile`Ground_tile1`)
+})

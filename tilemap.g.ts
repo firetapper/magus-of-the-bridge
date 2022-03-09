@@ -2,17 +2,23 @@
 namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const transparency16 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile1 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile3 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile4 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
             case "level1":
-            case "level1":return tiles.createTilemap(hex`1000100000000000000000000000000000000000000001020000000000000000000000000000060600000001020000000000000000000603020000030900000000000000000103030302000303000000010200000003030303030306030000000306000000030309030303030303080303030000000403030303030303030303030300000000030303030303030306030906000000000303060606030303030306030000000103030603030303030303060500000003030306030303070303030600000000040303030303030303030300000000000000040303030303030305000000000000000000000000000000000000000000000000000000000000000000000000`, img`
+            case "level1":return tiles.createTilemap(hex`10001000000000000000000000000000000000000000010200000000000000000000000000000908000000010200000000000000000009070200000708000000000000000001070b0702000707000000010200000007070707070709070000000709000000070708070707070707060707070000000407070707070707070707070b000000000707070707070707090708090000000007070908090707070707090300000001070709070707070707070905000000070b07080707070a0707070900000000040707070707070707070700000000000000040707070707070705000000000000000000000000000000000000000000000000000000000000000000000000`, img`
 2 2 2 2 2 2 2 2 2 2 . 2 2 2 2 2 
 2 2 . . 2 2 2 2 2 2 . 2 2 2 2 2 
 2 2 2 2 2 2 2 . . 2 . 2 2 2 2 2 
 2 2 2 . . 2 2 . 2 2 . 2 2 2 2 2 
 2 . . . . . 2 . . 2 . 2 . . 2 2 
-2 . . . . . . 2 . 2 . 2 . 2 2 2 
+2 . . . . . . 2 . 2 2 2 . 2 2 2 
 2 . . 2 . . . . . . . . . . 2 2 
 2 . . . . . . . . . . . . . 2 2 
 2 2 . . . . . . . . 2 . 2 2 2 2 
@@ -23,7 +29,7 @@ namespace myTiles {
 2 2 2 . . . . . . . . . 2 2 2 2 
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-`, [myTiles.transparency16,sprites.swamp.swampTile10,sprites.swamp.swampTile11,sprites.swamp.swampTile16,sprites.swamp.swampTile18,sprites.swamp.swampTile19,sprites.dungeon.floorLight2,sprites.dungeon.collectibleInsignia,sprites.dungeon.floorDarkDiamond,sprites.dungeon.floorLight5], TileScale.Sixteen);
+`, [myTiles.transparency16,sprites.swamp.swampTile10,sprites.swamp.swampTile11,sprites.swamp.swampTile16,sprites.swamp.swampTile18,sprites.swamp.swampTile19,sprites.dungeon.floorDarkDiamond,myTiles.tile1,sprites.dungeon.floorDark1,sprites.dungeon.floorDark0,myTiles.tile3,myTiles.tile4], TileScale.Sixteen);
         }
         return null;
     })
@@ -31,6 +37,12 @@ namespace myTiles {
     helpers._registerFactory("tile", function(name: string) {
         switch(helpers.stringTrim(name)) {
             case "transparency16":return transparency16;
+            case "Ground_tile0":
+            case "tile1":return tile1;
+            case "Ground_tile":
+            case "tile3":return tile3;
+            case "Ground_tile1":
+            case "tile4":return tile4;
         }
         return null;
     })
