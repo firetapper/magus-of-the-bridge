@@ -134,3 +134,8 @@ scene.setBackgroundImage(img`
     `)
 tiles.placeOnRandomTile(NecroPlayer, sprites.dungeon.collectibleInsignia)
 info.setLife(5)
+game.showLongText("Welcome To the game \"Magus of the Bridge\"!", DialogLayout.Center)
+game.showLongText("The goal of this game is simple.", DialogLayout.Center)
+game.showLongText("Shoot projectiles to kill enemies, raise them back to life to fight for you.", DialogLayout.Center)
+game.showLongText("Then, use their bodies as a literal bridge over to the next level!", DialogLayout.Center)
+game.showLongText("Have fun!", DialogLayout.Center)
