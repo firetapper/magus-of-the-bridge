@@ -7,7 +7,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 let Fireball: Sprite = null
 let NecroPlayer: Sprite = null
 NecroPlayer = sprites.create(assets.image`Necro-Player`, SpriteKind.Player)
-controller.moveSprite(NecroPlayer)
+controller.moveSprite(NecroPlayer, 50, 50)
 scene.cameraFollowSprite(NecroPlayer)
 tiles.setCurrentTilemap(tilemap`level1`)
 scene.setBackgroundImage(img`
