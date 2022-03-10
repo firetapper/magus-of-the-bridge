@@ -4,16 +4,31 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         Fireball = sprites.createProjectileFromSprite(assets.image`Dark Blast`, NecroPlayer, controller.dx(1000), controller.dy(1000))
     }
 })
+tiles.onMapLoaded(function (tilemap2) {
+    info.setScore(0)
+})
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
-	
+    Soldier1hp.value += -1
+    Fireball.destroy(effects.fire, 500)
+    if (Soldier1hp.value < 1) {
+        Soldier.destroy(effects.fire, 500)
+    }
+})
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+    pause(500)
 })
 info.onLifeZero(function () {
     game.over(false, effects.dissolve)
 })
-let Soldier1hp: StatusBarSprite = null
+sprites.onDestroyed(SpriteKind.Enemy, function (sprite) {
+    info.changeScoreBy(1)
+})
 let Soldier: Sprite = null
+let Soldier1hp: StatusBarSprite = null
 let Fireball: Sprite = null
 let NecroPlayer: Sprite = null
+info.setScore(0)
 NecroPlayer = sprites.create(assets.image`Necro-Player`, SpriteKind.Player)
 controller.moveSprite(NecroPlayer, 50, 50)
 scene.cameraFollowSprite(NecroPlayer)
@@ -148,10 +163,24 @@ game.showLongText("Shoot projectiles to kill enemies, raise them back to life to
 game.showLongText("Then, use their bodies as a literal bridge over to the next level!", DialogLayout.Center)
 game.showLongText("Have fun!", DialogLayout.Center)
 game.onUpdateInterval(5000, function () {
-    Soldier = sprites.create(assets.image`Soldier1`, SpriteKind.Enemy)
-    Soldier.follow(NecroPlayer, 45)
-    tiles.placeOnRandomTile(Soldier, assets.tile`Ground_tile1`)
-    Soldier1hp = statusbars.create(20, 4, StatusBarKind.Health)
-    Soldier1hp.attachToSprite(Soldier)
-    Soldier1hp.value = 3
+    if (5 > info.score()) {
+        Soldier = sprites.create(assets.image`Soldier1`, SpriteKind.Enemy)
+        Soldier.follow(NecroPlayer, 45)
+        tiles.placeOnRandomTile(Soldier, assets.tile`Ground_tile1`)
+        Soldier1hp = statusbars.create(20, 4, StatusBarKind.Health)
+        Soldier1hp.attachToSprite(Soldier)
+        Soldier1hp.max = 3
+        Soldier1hp.value = 3
+    }
+})
+forever(function () {
+    let MusicOn = 0
+    while (MusicOn == 0) {
+        music.playMelody("E B C5 A B G A F ", 170)
+    }
+})
+forever(function () {
+    if (info.score() == 5) {
+        tiles.setWallAt(tiles.getTileLocation(10, 5), false)
+    }
 })
