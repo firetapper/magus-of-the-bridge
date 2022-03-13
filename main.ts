@@ -1,7 +1,9 @@
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (0 != NecroPlayer.vx || 0 != NecroPlayer.vy) {
-        music.zapped.play()
         Fireball = sprites.createProjectileFromSprite(assets.image`Dark Blast`, NecroPlayer, controller.dx(1000), controller.dy(1000))
+        music.playTone(659, music.beat(BeatFraction.Sixteenth))
+        music.playTone(523, music.beat(BeatFraction.Sixteenth))
+        music.playTone(494, music.beat(BeatFraction.Sixteenth))
     }
 })
 tiles.onMapLoaded(function (tilemap2) {
@@ -23,6 +25,9 @@ info.onLifeZero(function () {
 })
 sprites.onDestroyed(SpriteKind.Enemy, function (sprite) {
     info.changeScoreBy(1)
+    if (info.score() >= 5) {
+        music.powerUp.play()
+    }
 })
 let Soldier: Sprite = null
 let Soldier1hp: StatusBarSprite = null
