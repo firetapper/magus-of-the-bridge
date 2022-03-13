@@ -4,6 +4,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         music.playTone(659, music.beat(BeatFraction.Sixteenth))
         music.playTone(523, music.beat(BeatFraction.Sixteenth))
         music.playTone(494, music.beat(BeatFraction.Sixteenth))
+        pause(500)
     }
 })
 tiles.onMapLoaded(function (tilemap2) {
@@ -21,13 +22,15 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, oth
         Champ1Bar.value += -1
         if (Champ1Bar.value < 1) {
             Champion.destroy(effects.confetti, 1000)
-            music.jumpDown.play()
+            info.changeScoreBy(5)
+            music.magicWand.play()
             game.over(true, effects.confetti)
         }
     }
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
     info.changeLifeBy(-1)
+    scene.cameraShake(4, 200)
     pause(500)
 })
 info.onLifeZero(function () {
@@ -203,12 +206,13 @@ game.onUpdateInterval(5000, function () {
     }
 })
 forever(function () {
-    while (MusicOn == 0) {
+    if (MusicOn == 0) {
         music.playMelody("E B C5 A B G A F ", 170)
     }
 })
 forever(function () {
     if (info.score() == 5) {
         tiles.setWallAt(tiles.getTileLocation(10, 5), false)
+        MusicOn = 1
     }
 })
