@@ -10,10 +10,20 @@ tiles.onMapLoaded(function (tilemap2) {
     info.setScore(0)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
-    Soldier1hp.value += -1
-    Fireball.destroy(effects.fire, 500)
-    if (Soldier1hp.value < 1) {
-        Soldier.destroy(effects.fire, 500)
+    if (Champ1on == 0) {
+        Soldier1hp.value += -1
+        Fireball.destroy(effects.fire, 200)
+        if (Soldier1hp.value < 1) {
+            Soldier.destroy(effects.fountain, 200)
+        }
+    } else {
+        Fireball.destroy(effects.fire, 200)
+        Champ1Bar.value += -1
+        if (Champ1Bar.value < 1) {
+            Champion.destroy(effects.confetti, 1000)
+            music.jumpDown.play()
+            game.over(true, effects.confetti)
+        }
     }
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
@@ -29,10 +39,14 @@ sprites.onDestroyed(SpriteKind.Enemy, function (sprite) {
         music.powerUp.play()
     }
 })
+let Champion: Sprite = null
+let Champ1Bar: StatusBarSprite = null
 let Soldier: Sprite = null
 let Soldier1hp: StatusBarSprite = null
+let Champ1on = 0
 let Fireball: Sprite = null
 let NecroPlayer: Sprite = null
+let MusicOn = 0
 info.setScore(0)
 NecroPlayer = sprites.create(assets.image`Necro-Player`, SpriteKind.Player)
 controller.moveSprite(NecroPlayer, 50, 50)
@@ -176,10 +190,19 @@ game.onUpdateInterval(5000, function () {
         Soldier1hp.attachToSprite(Soldier)
         Soldier1hp.max = 3
         Soldier1hp.value = 3
+    } else {
+        if (Champ1on == 0) {
+            Champion = sprites.create(assets.image`Champeon_soldier`, SpriteKind.Enemy)
+            Champion.follow(NecroPlayer, 42)
+            Champ1Bar = statusbars.create(20, 4, StatusBarKind.Health)
+            Champ1Bar.attachToSprite(Champion, 0, 0)
+            Champ1Bar.max = 8
+            Champ1Bar.value = 8
+            Champ1on += 1
+        }
     }
 })
 forever(function () {
-    let MusicOn = 0
     while (MusicOn == 0) {
         music.playMelody("E B C5 A B G A F ", 170)
     }
